@@ -195,6 +195,15 @@
                 :items="expenseTypes.filter(item => item.type === (internalPayload.value > 0 ? 'income' : 'expense')).map(item => item.name)"
                 label="Tipo"
               />
+
+              <forms-datetime-text-field
+                v-model="internalPayload.expenseDate"
+                :rules="[formRules.requiredString, formRules.validDatetime]"
+                :max="getMaxInputDatetime()"
+                :min="getMinInputDatetime()"
+                label="Data da despesa"
+                flat
+              />
             </template>
 
             <template #activator="{ props: activatorProps }">

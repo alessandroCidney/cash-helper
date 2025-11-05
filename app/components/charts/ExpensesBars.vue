@@ -72,7 +72,7 @@ const expensesPerDay = computed(() => {
   }))
 
   for (const expenseData of lastSevenDaysExpenses.value) {
-    const registeredDayData = allDays.find(registeredDay => registeredDay.dayName === getDayName(expenseData.createdAt))
+    const registeredDayData = allDays.find(registeredDay => registeredDay.dayName === getDayName(expenseData.expenseDate))
 
     const group = expenseData.value > 0 ? 'positive' : 'negative'
 

@@ -162,7 +162,7 @@
             </v-list-item-title>
 
             <v-list-item-subtitle>
-              {{ dateToLargeStr(expenseData.createdAt) }}
+              {{ dateToLargeStr(expenseData.expenseDate) }}
             </v-list-item-subtitle>
 
             <template #append>

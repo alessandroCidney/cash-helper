@@ -61,21 +61,3 @@ export function filterByTheLastSevenDays<T extends DatabaseObject>(arr: T[]) {
     return item.createdAt >= dateToUnixTimestamp(sevenDaysAgo)
   })
 }
-
-export function getMaxInputDate() {
-  let currentDate = new Date()
-
-  const offset = currentDate.getTimezoneOffset()
-
-  currentDate = new Date(currentDate.getTime() - (offset * 60 * 1000))
-
-  return currentDate.toISOString().split('T')[0]
-}
-
-export function getMinInputDate() {
-  const dateObj = new Date()
-
-  dateObj.setFullYear(dateObj.getFullYear() - 200)
-
-  return dateObj.toISOString().split('T')[0]
-}

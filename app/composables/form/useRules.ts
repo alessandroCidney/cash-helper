@@ -23,11 +23,17 @@ export function useRules() {
     strongPassword(value: unknown) {
       const passwordRegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/
 
-      return (typeof value === 'string' && passwordRegExp.test(value)) || 'No mínimo 8 caracteres, contendo letras, números e caracteres especiais.'
+      return (typeof value === 'string' && passwordRegExp.test(value)) || 'No mínimo 8 caracteres, contendo letras, números e caracteres especiais'
     },
 
     matchingPasswords(password: unknown, confirmPassword: unknown) {
       return password === confirmPassword || 'As senhas não correspondem'
+    },
+
+    validDatetime(value: unknown) {
+      const datetimeRegExp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/
+
+      return (typeof value === 'string' && datetimeRegExp.test(value)) || 'Data inválida'
     },
   }
 }
