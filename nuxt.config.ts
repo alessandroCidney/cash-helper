@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/test-utils',
     '@pinia/nuxt',
+    'motion-v/nuxt',
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
         // @ts-expect-error - Vuetify documentation says this comment is required for the configuration to work correctly
