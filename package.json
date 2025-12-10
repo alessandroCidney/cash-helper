@@ -10,7 +10,6 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-
     "deploy": "firebase deploy",
     "deploy:firestore-rules": "firebase deploy --only firestore:rules"
   },
@@ -24,7 +23,7 @@
     "eslint": "^9.33.0",
     "firebase": "^12.1.0",
     "lodash": "^4.17.21",
-    "nuxt": "^4.0.3",
+    "nuxt": "^4.2.2",
     "pinia": "^3.0.3",
     "uuid": "^11.1.0",
     "vue": "^3.5.18",
