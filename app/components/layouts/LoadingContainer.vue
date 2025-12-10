@@ -62,9 +62,12 @@ const intervalKey = ref<ReturnType<typeof setInterval>>()
 
 onMounted(() => {
   intervalKey.value = setInterval(() => {
-    const currentTime = motionTime.get() % interval
+    if (!authStore.loadingAuth) {
+      clearInterval(intervalKey.value)
+      return
+    }
 
-    console.log('time2', currentTime)
+    const currentTime = motionTime.get() % interval
 
     if (currentTime > 4000) {
       transform.value = `translateX(0px)`

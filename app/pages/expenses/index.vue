@@ -316,7 +316,7 @@ async function handleCreateExpense() {
       name: '',
     })
 
-    if (createExpenseFormPayload.value.type === 'Doação' && createExpenseFormPayload.value.value < 0) {
+    if (createExpenseFormPayload.value.type === 'Doação' && selectedMode.value === 'expense') {
       await achievementsStore.completeAchievement('loving')
     }
 
