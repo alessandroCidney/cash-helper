@@ -1,6 +1,6 @@
 {
-  "name": "MoneySpy",
-  "short_name": "MoneySpy",
+  "name": "CashHelper",
+  "short_name": "CashHelper",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

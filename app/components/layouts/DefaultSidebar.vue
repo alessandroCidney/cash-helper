@@ -38,7 +38,7 @@
       class="logoArea d-flex align-center justify-start ga-2 px-5"
     >
       <commons-app-logo
-        :width="170"
+        :width="190"
       />
     </div>
 

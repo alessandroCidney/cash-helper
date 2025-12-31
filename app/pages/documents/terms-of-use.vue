@@ -3,7 +3,7 @@
     <h2>Termos de uso</h2>
 
     <p>
-      Esses Termos de Uso em como finalidade regir o seu acesso e utilização do MoneySpy, fornecendo diversas informações sobre a plataforma. Por favor, leia-os com atenção.
+      Esses Termos de Uso em como finalidade regir o seu acesso e utilização do CashHelper, fornecendo diversas informações sobre a plataforma. Por favor, leia-os com atenção.
     </p>
 
     <section>
@@ -12,7 +12,7 @@
       </h3>
 
       <p>
-        A plataforma MoneySpy tem como principal objetivo permitir que os Usuários possam registrar e organizar suas despesas pessoais, fornecendo acesso à um sistema de cadastro e diversos relatórios úteis.
+        A plataforma CashHelper tem como principal objetivo permitir que os Usuários possam registrar e organizar suas despesas pessoais, fornecendo acesso à um sistema de cadastro e diversos relatórios úteis.
 
         Além disso, a plataforma também conta com um sistema de gamificação, permitindo que os usuários atinjam objetivos e obtenham recompensas dentro da plataforma, como temas de cores, por exemplo.
       </p>
@@ -24,15 +24,15 @@
       </h3>
 
       <p>
-        Ao utilizar a plataforma MoneySpy, o Usuário indica que leu e concordou com os Termos de Uso e com a Política de Privacidade da plataforma.
+        Ao utilizar a plataforma CashHelper, o Usuário indica que leu e concordou com os Termos de Uso e com a Política de Privacidade da plataforma.
       </p>
 
       <p>
-        Algumas páginas da plataforma MoneySpy necessitam que o Usuário passe pelo processo de cadastro para que possam ser acessadas. Durante o cadastro, a plataforma solicitará que o usuário informe os dados necessários para o login (e-mail, senha e dados pessoais), os quais serão requisitados posteriormente em futuros acessos à plataforma.
+        Algumas páginas da plataforma CashHelper necessitam que o Usuário passe pelo processo de cadastro para que possam ser acessadas. Durante o cadastro, a plataforma solicitará que o usuário informe os dados necessários para o login (e-mail, senha e dados pessoais), os quais serão requisitados posteriormente em futuros acessos à plataforma.
       </p>
 
       <p>
-        Ao realizar o cadastro na plataforma MoneySpy, o Usuário concorda com os seguintes itens:
+        Ao realizar o cadastro na plataforma CashHelper, o Usuário concorda com os seguintes itens:
       </p>
 
       <ul>
@@ -49,12 +49,12 @@
         </li>
 
         <li>
-          O Usuário confirma ter realizado a leitura, análise e aceite da Política de Privacidade da plataforma MoneySpy, onde informamos diversos aspectos relacionados ao tratamento e armazenamento de seus dados pessoais.
+          O Usuário confirma ter realizado a leitura, análise e aceite da Política de Privacidade da plataforma CashHelper, onde informamos diversos aspectos relacionados ao tratamento e armazenamento de seus dados pessoais.
         </li>
       </ul>
 
       <p>
-        Outro ponto importante é que, para que o Usuário consiga utilizar a plataforma MoneySpy, ele terá que aceitar que a plataforma (e, em casos extremos, seus administradores) tenha acesso aos seus dados pessoais e realize o armazenamento dessas informações. Para mais informações, você pode consultar a Política de Privacidade da plataforma.
+        Outro ponto importante é que, para que o Usuário consiga utilizar a plataforma CashHelper, ele terá que aceitar que a plataforma (e, em casos extremos, seus administradores) tenha acesso aos seus dados pessoais e realize o armazenamento dessas informações. Para mais informações, você pode consultar a Política de Privacidade da plataforma.
       </p>
 
       <p>
@@ -68,12 +68,12 @@
       </h3>
 
       <p>
-        Ao utilizar a plataforma MoneySpy, o usuário concorda que não poderá enviar nenhum dos seguintes tipos de conteúdo ao utilizar suas telas, interfaces, campos ou componentes interativos:
+        Ao utilizar a plataforma CashHelper, o usuário concorda que não poderá enviar nenhum dos seguintes tipos de conteúdo ao utilizar suas telas, interfaces, campos ou componentes interativos:
       </p>
 
       <ul>
         <li>
-          Conteúdo ofensivo, pornográfico, antiético, discriminatório, confidencial ou não condizente com as finalidades dos serviços oferecidos pela plataforma MoneySpy.
+          Conteúdo ofensivo, pornográfico, antiético, discriminatório, confidencial ou não condizente com as finalidades dos serviços oferecidos pela plataforma CashHelper.
         </li>
 
         <li>
@@ -86,7 +86,7 @@
       </ul>
 
       <p>
-        Além disso, ao utilizar a plataforma MoneySpy, o Usuário concorda que não poderá realizar quaisquer ações impróprias contra a plataforma e seus Usuários incluindo, mas não limitado a hacking , cracking, ataques de negação de serviço, engenharia social maliciosa, SQL injection, ataque XSS, ataque CSRF, etc.
+        Além disso, ao utilizar a plataforma CashHelper, o Usuário concorda que não poderá realizar quaisquer ações impróprias contra a plataforma e seus Usuários incluindo, mas não limitado a hacking , cracking, ataques de negação de serviço, engenharia social maliciosa, SQL injection, ataque XSS, ataque CSRF, etc.
       </p>
     </section>
 
@@ -96,7 +96,7 @@
       </h3>
 
       <p>
-        Os Termos de Uso e a Política de Privacidade poderão ser atualizados futuramente. Caso isso seja necessário, enviaremos uma notificação via interface da plataforma MoneySpy e, para continuar utilizando a plataforma, o Usuário concorda que sempre aceitará ambos os documentos em suas versões mais recentes. Caso o Usuário não concorde com isso, incentivamos a não realizar o cadastro na plataforma ou, caso já esteja cadastrado, excluir sua conta.
+        Os Termos de Uso e a Política de Privacidade poderão ser atualizados futuramente. Caso isso seja necessário, enviaremos uma notificação via interface da plataforma CashHelper e, para continuar utilizando a plataforma, o Usuário concorda que sempre aceitará ambos os documentos em suas versões mais recentes. Caso o Usuário não concorde com isso, incentivamos a não realizar o cadastro na plataforma ou, caso já esteja cadastrado, excluir sua conta.
       </p>
     </section>
 
@@ -106,7 +106,7 @@
       </h3>
 
       <p>
-        A plataforma MoneySpy e seus administradores se reservam o direito de, ao identificar que algum Usuário infringiu algum item da Política de Privacidade ou dos Termos de Uso, que infringiu de alguma forma os direitos de outros Usuários ou dos administradores ou que realizou quaisquer ações relacionadas, realizar a remoção da conta do Usuário em questão ou de remover o conteúdo danoso inserido por este Usuário.
+        A plataforma CashHelper e seus administradores se reservam o direito de, ao identificar que algum Usuário infringiu algum item da Política de Privacidade ou dos Termos de Uso, que infringiu de alguma forma os direitos de outros Usuários ou dos administradores ou que realizou quaisquer ações relacionadas, realizar a remoção da conta do Usuário em questão ou de remover o conteúdo danoso inserido por este Usuário.
       </p>
     </section>
 
@@ -116,7 +116,7 @@
       </h3>
 
       <p>
-        A plataforma MoneySpy e seus administradores não se responsabilizam por:
+        A plataforma CashHelper e seus administradores não se responsabilizam por:
       </p>
 
       <ul>
@@ -144,7 +144,7 @@
       </h3>
 
       <p>
-        A plataforma MoneySpy e seus administradores se reservam o direito de encerrar as operações da plataforma a qualquer momento, realizando a devida exclusão dos dados armazenados.
+        A plataforma CashHelper e seus administradores se reservam o direito de encerrar as operações da plataforma a qualquer momento, realizando a devida exclusão dos dados armazenados.
       </p>
     </section>
 

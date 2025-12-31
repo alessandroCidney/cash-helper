@@ -13,7 +13,7 @@ const routes = getRoutes()
 const route = useRoute()
 
 // Head settings
-const baseTitle = ref('MoneySpy')
+const baseTitle = ref('CashHelper')
 
 const currentRouteName = computed(() => routes.find(item => item.name === route.name)?.title)
 
