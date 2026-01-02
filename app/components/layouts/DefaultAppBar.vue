@@ -10,7 +10,7 @@
       #prepend
     >
       <commons-app-logo
-        :width="170"
+        :width="190"
         class="mx-4"
       />
     </template>

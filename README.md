@@ -1,9 +1,9 @@
-# MoneySpy
+# CashHelper
 
-MoneySpy is a Nuxt.js/Vue.js website where you can log and monitor your expenses. It offers a great dashboard, an expense tracking interface, an achievements system, profile settings, authentication, and more.
+CashHelper is a Nuxt.js/Vue.js website where you can log and monitor your expenses. It offers a great dashboard, an expense tracking interface, an achievements system, profile settings, authentication, and more.
 
 ## Live Website
-You can access the website at <https://www.moneyspy.com.br>
+You can access the website at <https://cashhelper-prod.web.app/>
 
 ## How to Run the Website
 
