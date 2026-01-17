@@ -1,4 +1,8 @@
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware(async (to) => {
+  if (to.name === 'loading') {
+    return
+  }
+
   const runtimeConfig = useRuntimeConfig()
 
   const blockAppAccess = runtimeConfig.public.BLOCK_APP_ACCESS === 'true'

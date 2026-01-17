@@ -1,21 +1,19 @@
 <template>
-  <layouts-loading-container>
-    <v-app>
-      <template v-if="vuetifyDisplay.md.value">
-        <layouts-default-app-bar />
-        <layouts-default-sidebar />
-      </template>
+  <v-app>
+    <template v-if="vuetifyDisplay.md.value">
+      <layouts-default-app-bar />
+      <layouts-default-sidebar />
+    </template>
 
-      <template v-else>
-        <layouts-default-sidebar />
-        <layouts-default-app-bar />
-      </template>
+    <template v-else>
+      <layouts-default-sidebar />
+      <layouts-default-app-bar />
+    </template>
 
-      <v-main class="removeTransitions">
-        <slot />
-      </v-main>
-    </v-app>
-  </layouts-loading-container>
+    <v-main class="removeTransitions">
+      <slot />
+    </v-main>
+  </v-app>
 </template>
 
 <script setup lang="ts">

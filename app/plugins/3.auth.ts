@@ -24,12 +24,11 @@ async function loadAdditionalItems() {
   }
 }
 
-export default defineNuxtPlugin(async () => {
+async function authCheck() {
   const authStore = useAuthStore()
   const usersCrud = useUsersCrud()
 
   const auth = getAuth()
-
   await auth.authStateReady()
 
   const authUser = auth.currentUser
@@ -51,7 +50,33 @@ export default defineNuxtPlugin(async () => {
     authStore.setAuthUser(null)
     authStore.setDatabaseUser(null)
     authStore.setPrivateProfileData(null)
-  } finally {
-    authStore.setLoadingAuth(false)
   }
+}
+
+export default defineNuxtPlugin(async (nuxtApp) => {
+  const route = useRoute()
+
+  const initialTargetRoute = route.name === 'loading'
+    ? {
+        name: 'index',
+      }
+    : {
+        name: route.name,
+        params: route.params,
+        query: route.query,
+      }
+
+  // Executed after the initial run of middlewares
+  nuxtApp.hook('app:created', async () => {
+    // Redirect to loading to allow middlewares rerun in the next redirection
+    await navigateTo({
+      name: 'loading',
+    })
+
+    // If you use "await" here, the loading will not be shown
+    authCheck()
+      .then(() => {
+        navigateTo(initialTargetRoute)
+      })
+  })
 })
