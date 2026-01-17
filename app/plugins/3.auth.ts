@@ -50,6 +50,8 @@ async function authCheck() {
     authStore.setAuthUser(null)
     authStore.setDatabaseUser(null)
     authStore.setPrivateProfileData(null)
+  } finally {
+    authStore.setLoadingAuth(false)
   }
 }
 

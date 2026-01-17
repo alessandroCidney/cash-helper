@@ -6,6 +6,7 @@ export const useAuthStore = defineStore('auth', {
     privateProfileData: null as DatabaseUserPrivateData | null,
     authUser: null as User | null,
 
+    loadingAuth: true,
     loadingSignOut: false,
     loadingDeleteFirebaseAccount: false,
   }),
@@ -61,6 +62,10 @@ export const useAuthStore = defineStore('auth', {
 
     setPrivateProfileData(data: typeof this.privateProfileData) {
       this.privateProfileData = data
+    },
+
+    setLoadingAuth(data: typeof this.loadingAuth) {
+      this.loadingAuth = data
     },
 
     async handleSignOut() {
