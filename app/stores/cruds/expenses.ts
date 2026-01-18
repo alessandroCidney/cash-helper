@@ -1,8 +1,10 @@
-import { orderBy, where } from 'firebase/firestore'
+import { limit, orderBy, startAfter, where } from 'firebase/firestore'
 
 export const useExpensesStore = defineStore('expenses', {
   state: () => ({
     items: [] as DatabaseExpense[],
+
+    nextPageExists: undefined as boolean | undefined,
 
     loadingList: false,
     loadedOnce: false,
@@ -31,11 +33,54 @@ export const useExpensesStore = defineStore('expenses', {
           orderBy('expenseDate', 'desc'),
           where('expenseDate', '>=', sevenDaysAgoUnixTimestamp),
         ])
+
+        await this.completeLastPage()
+
         this.loadedOnce = true
       } catch (err) {
         globalErrorHandler(err)
       } finally {
         this.loadingList = false
+      }
+    },
+
+    async completeLastPage() {
+      const expensesCrud = useExpensesCrud()
+
+      const paginationData = getPaginationData(this.items)
+
+      if (!paginationData.lastPageIsFull) {
+        const newItems = await expensesCrud.list([
+          orderBy('expenseDate', 'desc'),
+          startAfter(this.items[this.items.length - 1]?.expenseDate),
+          limit(paginationData.quantityToCompleteLastPage + 1),
+        ])
+
+        if (newItems.length === paginationData.quantityToCompleteLastPage + 1) {
+          this.nextPageExists = true
+
+          newItems.pop()
+        }
+
+        this.items.push(...newItems)
+      }
+    },
+
+    async getNextPage() {
+      await this.completeLastPage()
+
+      const expensesCrud = useExpensesCrud()
+
+      const paginationData = getPaginationData(this.items)
+
+      if (this.nextPageExists) {
+        const newItems = await expensesCrud.list([
+          orderBy('expenseDate', 'desc'),
+          startAfter(this.items[this.items.length - 1]?.expenseDate),
+          limit(paginationData.itemsPerPage),
+        ])
+
+        this.items.push(...newItems)
       }
     },
 

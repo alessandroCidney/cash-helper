@@ -233,7 +233,7 @@ const vuetifyDisplay = useDisplay()
 
 const expensesStore = useExpensesStore()
 
-const lastSevenDaysExpenses = computed(() => filterByTheLastSevenDays(expensesStore.items))
+const lastSevenDaysExpenses = computed(() => filterByTheLastSevenDays(expensesStore.items, 'expenseDate'))
 
 const expensesByType = computed(() => {
   interface ExpenseTypeData {

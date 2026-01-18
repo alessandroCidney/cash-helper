@@ -60,7 +60,7 @@ defineProps({
   height: { type: String, required: true },
 })
 
-const lastSevenDaysExpenses = computed(() => filterByTheLastSevenDays(expensesStore.items))
+const lastSevenDaysExpenses = computed(() => filterByTheLastSevenDays(expensesStore.items, 'expenseDate'))
 
 const isEmpty = computed(() => lastSevenDaysExpenses.value.length === 0)
 

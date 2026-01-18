@@ -3,7 +3,7 @@ export const lightTheme = {
 
   colors: {
     'primary': '#1ADB87',
-    'secondary': '#000000',
+    'secondary': '#023B2F',
     'root': '#FFFFFF',
     'container': '#f8f8f8',
     'card': '#FFFFFF',

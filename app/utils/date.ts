@@ -46,7 +46,7 @@ export function getLastSevenDays(baseDate = new Date()) {
   return daysSorted
 }
 
-export function filterByTheLastSevenDays<T extends DatabaseObject>(arr: T[]) {
+export function filterByTheLastSevenDays<T extends DatabaseObject>(arr: T[], dateProperty: keyof T) {
   /**
    * This calculation will return the start of the day after the day seven days ago.
    * Example: If today is Monday, the calculation will not return Monday, but rather the start of Tuesday.
@@ -58,6 +58,10 @@ export function filterByTheLastSevenDays<T extends DatabaseObject>(arr: T[]) {
   sevenDaysAgo.setHours(0, 0, 0, 0)
 
   return arr.filter((item) => {
-    return item.createdAt >= dateToUnixTimestamp(sevenDaysAgo)
+    if (typeof item[dateProperty] !== 'number') {
+      throw new Error('Invalid date value')
+    }
+
+    return item[dateProperty] >= dateToUnixTimestamp(sevenDaysAgo)
   })
 }
