@@ -1,4 +1,4 @@
-import { limit, orderBy, startAfter, where } from 'firebase/firestore'
+import { limit, orderBy, startAfter } from 'firebase/firestore'
 
 export const useExpensesStore = defineStore('expenses', {
   state: () => ({
@@ -23,18 +23,19 @@ export const useExpensesStore = defineStore('expenses', {
 
         const expensesCrud = useExpensesCrud()
 
-        const sevenDaysAgoDate = new Date(Date.now() - 6 * 24 * 60 * 60 * 1000)
+        /* TODO: Finish pagination system */
 
-        sevenDaysAgoDate.setHours(0, 0, 0, 0)
+        // const sevenDaysAgoDate = new Date(Date.now() - 6 * 24 * 60 * 60 * 1000)
 
-        const sevenDaysAgoUnixTimestamp = dateToUnixTimestamp(sevenDaysAgoDate)
+        // sevenDaysAgoDate.setHours(0, 0, 0, 0)
+
+        // const sevenDaysAgoUnixTimestamp = dateToUnixTimestamp(sevenDaysAgoDate)
 
         this.items = await expensesCrud.list([
           orderBy('expenseDate', 'desc'),
-          where('expenseDate', '>=', sevenDaysAgoUnixTimestamp),
         ])
 
-        await this.completeLastPage()
+        // await this.completeLastPage()
 
         this.loadedOnce = true
       } catch (err) {

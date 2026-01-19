@@ -1,5 +1,7 @@
 import { getAuth } from 'firebase/auth'
 
+import { useAchievements } from '~/composables/plugins/useAchievements'
+
 import { useExpensesStore } from '~/stores/cruds/expenses'
 
 async function loadAdditionalItems() {
@@ -22,6 +24,10 @@ async function loadAdditionalItems() {
 
     notificationsStore.addAchievementNotification('beginner')
   }
+
+  const { loadAndCheckAchievements } = useAchievements()
+
+  await loadAndCheckAchievements()
 }
 
 async function authCheck() {
@@ -42,7 +48,7 @@ async function authCheck() {
       authStore.setDatabaseUser(databaseUser)
       authStore.setPrivateProfileData(databaseUserPrivateData)
 
-      loadAdditionalItems()
+      await loadAdditionalItems()
     } else {
       throw new Error('Unauthenticated')
     }

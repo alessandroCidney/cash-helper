@@ -19,7 +19,6 @@ export function getInputDatetimeFromDate(date: Date) {
 
 // Datetime Str -> XXXX-XX-XXTXX:XX
 export function inputDatetimeToDate(dateTimeStr: string) {
-  console.log('date', dateTimeStr)
   return new Date(dateTimeStr)
 }
 

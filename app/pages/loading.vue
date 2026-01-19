@@ -19,14 +19,14 @@
           cx="63"
           cy="63"
           r="60.5"
-          fill="#1ADB87"
+          fill="rgb(var(--v-theme-primary))"
         />
 
         <circle
           cx="63"
           cy="63"
           r="48"
-          fill="black"
+          fill="rgb(var(--v-theme-secondary))"
         />
 
         <motion.circle

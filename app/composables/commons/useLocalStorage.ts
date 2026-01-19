@@ -15,11 +15,12 @@ export function useLocalStorage() {
     return !!themesDataArr.find(item => item.id === themeId)?.allowed
   }
 
-  function getSystemTheme() {
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'darkTheme'
-      : 'lightTheme'
-  }
+  /* TODO: Review dark theme colors / Fix loving theme reload error */
+  // function getSystemTheme() {
+  //   return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  //     ? 'darkTheme'
+  //     : 'lightTheme'
+  // }
 
   function loadSavedTheme() {
     const savedThemeId = localStorage.getItem(THEME_SETTINGS_LOCAL_STORAGE_KEY)
@@ -29,7 +30,7 @@ export function useLocalStorage() {
     }
 
     if (savedThemeId === null) {
-      selectedThemeId.value = getSystemTheme()
+      selectedThemeId.value = 'lightTheme' // getSystemTheme()
     }
   }
 
