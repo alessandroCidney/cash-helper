@@ -2,8 +2,6 @@ import _ from 'lodash'
 
 export function useAchievements() {
   async function loadAndCheckAchievements() {
-    /* TODO: Review achievements with the new auth system */
-
     const authStore = useAuthStore()
     const achievementsStore = useAchievementsStore()
     const notificationsStore = useNotificationsStore()

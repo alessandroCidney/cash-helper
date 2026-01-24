@@ -1,7 +1,7 @@
-const DEFAULT_ITEMS_PER_PAGE = 10
+export const DEFAULT_ITEMS_PER_PAGE = 10
 
 export function getPaginationData(arr: unknown[]) {
-  const loadedPages = Math.ceil(arr.length / DEFAULT_ITEMS_PER_PAGE)
+  const loadedPages = Math.ceil(arr.length / DEFAULT_ITEMS_PER_PAGE) || 1
 
   const lastPageIsFull = arr.length % DEFAULT_ITEMS_PER_PAGE === 0
 
@@ -13,6 +13,5 @@ export function getPaginationData(arr: unknown[]) {
     loadedPages,
     lastPageIsFull,
     quantityToCompleteLastPage,
-    itemsPerPage: DEFAULT_ITEMS_PER_PAGE,
   }
 }

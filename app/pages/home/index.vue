@@ -90,13 +90,13 @@
                 color="secondary"
               >
                 <v-icon>
-                  {{ expenseData.icon }}
+                  {{ getExpenseTypeData(expenseData.type)?.icon }}
                 </v-icon>
               </v-avatar>
             </template>
 
             <v-list-item-title>
-              {{ expenseData.type }}
+              {{ getExpenseTypeData(expenseData.type)?.name }}
             </v-list-item-title>
 
             <template #append>
@@ -108,7 +108,7 @@
         </v-list>
       </section>
 
-      <section class="latestExpenses defaultWhiteCard">
+      <section class="latestExpenses defaultWhiteCard overflow-hidden">
         <h2 class="mb-4">
           Movimentações recentes
         </h2>
@@ -158,7 +158,7 @@
             </template>
 
             <v-list-item-title>
-              {{ expenseData.type }}
+              {{ getExpenseTypeData(expenseData.type)?.name }}
             </v-list-item-title>
 
             <v-list-item-subtitle>
