@@ -83,15 +83,26 @@
             v-model="createExpenseFormPayload.type"
             v-model:focused="typeFieldIsFocused"
             :rules="[formRules.requiredString]"
-            :items="expenseTypes.filter(item => item.type === selectedMode).map(item => item.name)"
+            :items="expenseTypes.filter(item => item.type === selectedMode)"
             :disabled="expensesStore.loadingCreate"
+            :return-object="false"
+            item-value="id"
+            item-title="name"
+            item-type="tableType"
             bg-color="card"
             placeholder="Selecionar tipo"
             variant="solo"
             hide-details
             rounded
             flat
-          />
+          >
+            <template #item="{ props: comboboxItemProps, item: comboboxItem }">
+              <v-list-item
+                v-bind="comboboxItemProps"
+                :prepend-icon="comboboxItem.raw.icon"
+              />
+            </template>
+          </v-combobox>
         </div>
 
         <v-btn
@@ -142,8 +153,11 @@
         v-else
         :items="expensesStore.items"
         :headers="expenseTableHeaders"
+        :page="currentTablePage"
+        :items-per-page="DEFAULT_ITEMS_PER_PAGE"
         items-per-page-text="Itens por página:"
         class="expensesTable bg-card flex-fill"
+        hide-default-footer
       >
         <template #[`item.type`]="{ item: expenseData }">
           <v-avatar
@@ -156,7 +170,7 @@
           </v-avatar>
 
           <span class="font-weight-medium">
-            {{ expenseData.type }}
+            {{ getExpenseTypeData(expenseData.type)?.name }}
           </span>
         </template>
 
@@ -192,7 +206,10 @@
               <v-combobox
                 v-model="internalPayload.type"
                 :rules="[formRules.requiredString]"
-                :items="expenseTypes.filter(item => item.type === (internalPayload.value > 0 ? 'income' : 'expense')).map(item => item.name)"
+                :items="expenseTypes.filter(item => item.type === (internalPayload.value > 0 ? 'income' : 'expense'))"
+                :return-object="false"
+                item-value="id"
+                item-title="name"
                 label="Tipo"
               />
 
@@ -209,6 +226,7 @@
             <template #activator="{ props: activatorProps }">
               <v-btn
                 v-bind="activatorProps"
+                :disabled="tableLoading.somethingIsLoading.value"
                 icon="mdi-pencil"
                 color="secondary"
                 variant="text"
@@ -234,6 +252,7 @@
             <template #activator="{ props: activatorProps }">
               <v-btn
                 v-bind="activatorProps"
+                :disabled="tableLoading.somethingIsLoading.value"
                 icon="mdi-delete"
                 color="secondary"
                 variant="text"
@@ -243,6 +262,33 @@
           </commons-confirm-dialog>
         </template>
       </v-data-table>
+
+      <div class="d-flex align-center justify-end ga-3 w-100 pt-5">
+        <div>
+          Página {{ currentTablePage }}
+        </div>
+
+        <nav>
+          <li>
+            <v-btn
+              :disabled="currentTablePage === 1 || (tableLoading.somethingIsLoading.value && !tableLoading.loadingStatuses.value.previousPage)"
+              aria-label="Página anterior"
+              icon="mdi-chevron-left"
+              variant="text"
+              @click="currentTablePage--"
+            />
+
+            <v-btn
+              :loading="tableLoading.loadingStatuses.value.nextPage"
+              :disabled="!nextPageIsAvailable || (tableLoading.somethingIsLoading.value && !tableLoading.loadingStatuses.value.nextPage)"
+              aria-label="Próxima página"
+              icon="mdi-chevron-right"
+              variant="text"
+              @click="showNextPage()"
+            />
+          </li>
+        </nav>
+      </div>
     </section>
   </div>
 </template>
@@ -263,7 +309,16 @@ const expensesStore = useExpensesStore()
 const messageStore = useMessagesStore()
 const achievementsStore = useAchievementsStore()
 
+const tableLoading = useLoading({
+  nextPage: false,
+  previousPage: false,
+})
+
 const formRules = useRules()
+
+const currentTablePage = ref(1)
+
+const nextPageIsAvailable = computed(() => currentTablePage.value < getPaginationData(expensesStore.items).loadedPages || expensesStore.nextPageExists)
 
 const createExpenseForm = useTemplateRef('createExpenseForm')
 const valueFieldIsFocused = ref(false)
@@ -316,7 +371,7 @@ async function handleCreateExpense() {
       name: '',
     })
 
-    if (createExpenseFormPayload.value.type === 'Doação' && selectedMode.value === 'expense') {
+    if (createExpenseFormPayload.value.type === 'donation' && selectedMode.value === 'expense') {
       await achievementsStore.completeAchievement('loving')
     }
 
@@ -326,6 +381,27 @@ async function handleCreateExpense() {
     }
   } else {
     messageStore.showErrorMessage({ text: 'Dados inválidos!' })
+  }
+}
+
+async function showNextPage() {
+  try {
+    tableLoading.loadingStatuses.value.nextPage = true
+
+    if (currentTablePage.value < getPaginationData(expensesStore.items).loadedPages) {
+      currentTablePage.value++
+      return
+    }
+
+    if (expensesStore.nextPageExists) {
+      await expensesStore.getNextPage()
+
+      currentTablePage.value++
+    }
+  } catch (err) {
+    globalErrorHandler(err)
+  } finally {
+    tableLoading.loadingStatuses.value.nextPage = false
   }
 }
 </script>

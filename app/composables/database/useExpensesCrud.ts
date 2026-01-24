@@ -1,7 +1,9 @@
+import _ from 'lodash'
+
 import { useFirestoreCrud, type DatabaseObject } from './commons/useFirestoreCrud'
 
 export function getExpenseTypeData(typeName: string) {
-  return expenseTypes.find(item => item.name === typeName)
+  return expenseTypes.find(item => item.id === typeName)
 }
 
 export interface DatabaseExpense extends DatabaseObject {
@@ -29,7 +31,8 @@ export function useExpensesCrud(params?: UseExpensesCrudParams) {
   throw new Error('Unauthenticated')
 }
 
-export const expenseTypes = [
+export const expenseTypes = _.orderBy([
+  // Expense
   {
     id: 'market',
     name: 'Mercado',
@@ -61,6 +64,26 @@ export const expenseTypes = [
     type: 'expense',
   },
   {
+    id: 'health',
+    name: 'Saúde',
+    icon: 'mdi-hospital-box',
+    type: 'expense',
+  },
+  {
+    id: 'pharmacy',
+    name: 'Farmácia',
+    icon: 'mdi-bottle-tonic-plus',
+    type: 'expense',
+  },
+  {
+    id: 'transport',
+    name: 'Transporte',
+    icon: 'mdi-train-car',
+    type: 'expense',
+  },
+
+  // Income
+  {
     id: 'inflow',
     name: 'Entrada',
     icon: 'mdi-currency-usd',
@@ -69,7 +92,13 @@ export const expenseTypes = [
   {
     id: 'inflow',
     name: 'Salário',
-    icon: 'mdi-currency-usd',
+    icon: 'mdi-cash-multiple',
     type: 'income',
   },
-]
+  {
+    id: 'donation',
+    name: 'Doação',
+    icon: 'mdi-heart',
+    type: 'income',
+  },
+], ['name'], ['asc'])

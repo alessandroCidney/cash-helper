@@ -17,7 +17,7 @@
         cx="58.5"
         cy="56.5"
         r="45.5"
-        fill="black"
+        fill="rgb(var(--v-theme-secondary))"
       />
       <circle
         cx="64"

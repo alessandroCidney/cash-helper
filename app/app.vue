@@ -7,8 +7,6 @@
 </template>
 
 <script setup lang="ts">
-import { useTheme } from 'vuetify'
-
 const routes = getRoutes()
 const route = useRoute()
 
@@ -25,9 +23,13 @@ useHead({
   title: titleStr,
 })
 
-// Theme settings
-const vuetifyTheme = useTheme()
-const localStorageHandler = useLocalStorage()
+const authStore = useAuthStore()
 
-vuetifyTheme.change(localStorageHandler.selectedThemeId.value)
+const themesStore = useThemesStore()
+
+watch(() => authStore.loadingAuth, async (isLoading) => {
+  if (!isLoading) {
+    themesStore.loadInitialTheme()
+  }
+})
 </script>

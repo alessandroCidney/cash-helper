@@ -13,9 +13,9 @@ const props = defineProps({
   filename: { type: String, required: true },
 })
 
-const localStorageHandler = useLocalStorage()
+const themesStore = useThemesStore()
 
-const themePrefix = computed(() => _.kebabCase(localStorageHandler.selectedThemeId.value))
+const themePrefix = computed(() => _.kebabCase(themesStore.currentTheme))
 
 const imagePath = computed(() => `${props.basePath}/${themePrefix.value}-${props.filename}`)
 </script>

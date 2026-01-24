@@ -12,8 +12,6 @@
 const modelValue = defineModel<string | number>({ required: true })
 
 function handleUpdateValue(newValue: string | number) {
-  console.log('newValue', newValue, typeof newValue, isValidNumber(newValue))
-
   modelValue.value = isValidNumber(newValue)
     ? stringToNumber(newValue)
     : newValue

@@ -3,7 +3,7 @@ export const lightTheme = {
 
   colors: {
     'primary': '#1ADB87',
-    'secondary': '#000000',
+    'secondary': '#023B2F',
     'root': '#FFFFFF',
     'container': '#f8f8f8',
     'card': '#FFFFFF',
@@ -54,35 +54,4 @@ export const lovingTheme = {
     'deep-purple': '#673AB7',
     'black': '#000000',
   },
-}
-
-export function getThemesDataArr() {
-  const authStore = useAuthStore()
-
-  return [
-    {
-      id: 'lightTheme',
-      colors: [lightTheme.colors.secondary, lightTheme.colors.primary, lightTheme.colors.container],
-      title: 'Tema Claro',
-      description: 'Desbloqueável com a conquista "Novato"',
-
-      allowed: true,
-    },
-    {
-      id: 'darkTheme',
-      colors: [darkTheme.colors.secondary, darkTheme.colors.primary, darkTheme.colors.container],
-      title: 'Tema Escuro',
-      description: 'Desbloqueável com a conquista "Novato"',
-
-      allowed: true,
-    },
-    {
-      id: 'lovingTheme',
-      colors: [lovingTheme.colors.secondary, lovingTheme.colors.primary, lovingTheme.colors.container],
-      title: 'Tema Amoroso',
-      description: 'Desbloqueável com a conquista "Amoroso"',
-
-      allowed: !!authStore.privateProfileData?.achievements.complete.find(item => item.id === 'loving'),
-    },
-  ]
 }

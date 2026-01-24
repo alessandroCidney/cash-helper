@@ -1,8 +1,14 @@
-import { orderBy, where } from 'firebase/firestore'
+import { limit, orderBy, startAfter, where } from 'firebase/firestore'
+
+import _ from 'lodash'
+
+import { DEFAULT_ITEMS_PER_PAGE } from '~/utils/pagination'
 
 export const useExpensesStore = defineStore('expenses', {
   state: () => ({
     items: [] as DatabaseExpense[],
+
+    nextPageExists: undefined as boolean | undefined,
 
     loadingList: false,
     loadedOnce: false,
@@ -27,15 +33,87 @@ export const useExpensesStore = defineStore('expenses', {
 
         const sevenDaysAgoUnixTimestamp = dateToUnixTimestamp(sevenDaysAgoDate)
 
-        this.items = await expensesCrud.list([
+        let newItems = await expensesCrud.list([
           orderBy('expenseDate', 'desc'),
           where('expenseDate', '>=', sevenDaysAgoUnixTimestamp),
         ])
+
+        if (newItems.length === 0) {
+          // There are no recent items
+
+          newItems = await expensesCrud.list([
+            orderBy('expenseDate', 'desc'),
+            limit(DEFAULT_ITEMS_PER_PAGE + 1),
+          ])
+
+          this.checkIfNextPageExists(newItems, DEFAULT_ITEMS_PER_PAGE + 1)
+
+          this.items = newItems
+        } else {
+          this.items = newItems
+
+          await this.completeLastPage()
+        }
+
+        this.items = newItems
+
         this.loadedOnce = true
       } catch (err) {
         globalErrorHandler(err)
       } finally {
         this.loadingList = false
+      }
+    },
+
+    checkIfNextPageExists(newItems: unknown[], expectedQuantity: number) {
+      if (newItems.length === expectedQuantity) {
+        this.nextPageExists = true
+
+        newItems.pop()
+      } else {
+        this.nextPageExists = false
+      }
+    },
+
+    async completeLastPage() {
+      const expensesCrud = useExpensesCrud()
+
+      const paginationData = getPaginationData(this.items)
+
+      if (this.items.length === 0) {
+        return
+      }
+
+      const newItems = await expensesCrud.list([
+        orderBy('expenseDate', 'desc'),
+        startAfter(this.items[this.items.length - 1]?.expenseDate),
+        limit(paginationData.quantityToCompleteLastPage + 1),
+      ])
+
+      this.checkIfNextPageExists(newItems, paginationData.quantityToCompleteLastPage + 1)
+
+      this.items.push(...newItems)
+    },
+
+    async getNextPage() {
+      await this.completeLastPage()
+
+      const expensesCrud = useExpensesCrud()
+
+      if (this.items.length === 0) {
+        return
+      }
+
+      if (this.nextPageExists) {
+        const newItems = await expensesCrud.list([
+          orderBy('expenseDate', 'desc'),
+          startAfter(this.items[this.items.length - 1]?.expenseDate),
+          limit(DEFAULT_ITEMS_PER_PAGE + 1),
+        ])
+
+        this.checkIfNextPageExists(newItems, DEFAULT_ITEMS_PER_PAGE + 1)
+
+        this.items.push(...newItems)
       }
     },
 
@@ -48,6 +126,8 @@ export const useExpensesStore = defineStore('expenses', {
         const itemObj = await expensesCrud.create(...rest)
 
         this.items.unshift(itemObj)
+
+        await this.completeLastPage()
 
         const messageStore = useMessagesStore()
         messageStore.showSuccessMessage({ text: 'Registro adicionado!' })
@@ -70,10 +150,29 @@ export const useExpensesStore = defineStore('expenses', {
 
         const itemIndex = this.items.findIndex(item => item.id === itemObj.id)
 
-        if (itemIndex !== -1) {
+        const oldItem = this.items[itemIndex]
+
+        if (oldItem) {
+          const haveADateUpdate = oldItem.expenseDate !== itemObj.expenseDate
+
           this.items[itemIndex] = {
             ...data,
             ...itemObj,
+          }
+
+          if (haveADateUpdate) {
+            this.items = _.orderBy(this.items, ['expenseDate'], ['desc'])
+
+            const newItemIndex = this.items.findIndex(item => item.id === itemObj.id)
+
+            if (newItemIndex === this.items.length - 1) {
+              // The item has been moved to the end of the list.
+              // An unloaded item may be in a position before it.
+
+              this.items.pop()
+
+              await this.completeLastPage()
+            }
           }
         }
 
@@ -97,6 +196,8 @@ export const useExpensesStore = defineStore('expenses', {
         const itemIndex = this.items.findIndex(item => item.id === id)
 
         this.items.splice(itemIndex, 1)
+
+        await this.completeLastPage()
 
         const messageStore = useMessagesStore()
         messageStore.showSuccessMessage({ text: 'Registro removido!' })

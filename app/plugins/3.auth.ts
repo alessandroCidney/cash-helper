@@ -1,5 +1,7 @@
 import { getAuth } from 'firebase/auth'
 
+import { useAchievements } from '~/composables/plugins/useAchievements'
+
 import { useExpensesStore } from '~/stores/cruds/expenses'
 
 async function loadAdditionalItems() {
@@ -22,14 +24,17 @@ async function loadAdditionalItems() {
 
     notificationsStore.addAchievementNotification('beginner')
   }
+
+  const { loadAndCheckAchievements } = useAchievements()
+
+  await loadAndCheckAchievements()
 }
 
-export default defineNuxtPlugin(async () => {
+async function authCheck() {
   const authStore = useAuthStore()
   const usersCrud = useUsersCrud()
 
   const auth = getAuth()
-
   await auth.authStateReady()
 
   const authUser = auth.currentUser
@@ -43,7 +48,7 @@ export default defineNuxtPlugin(async () => {
       authStore.setDatabaseUser(databaseUser)
       authStore.setPrivateProfileData(databaseUserPrivateData)
 
-      loadAdditionalItems()
+      await loadAdditionalItems()
     } else {
       throw new Error('Unauthenticated')
     }
@@ -54,4 +59,32 @@ export default defineNuxtPlugin(async () => {
   } finally {
     authStore.setLoadingAuth(false)
   }
+}
+
+export default defineNuxtPlugin(async (nuxtApp) => {
+  const route = useRoute()
+
+  const initialTargetRoute = route.name === 'loading'
+    ? {
+        name: 'index',
+      }
+    : {
+        name: route.name,
+        params: route.params,
+        query: route.query,
+      }
+
+  // Executed after the initial run of middlewares
+  nuxtApp.hook('app:created', async () => {
+    // Redirect to loading to allow middlewares rerun in the next redirection
+    await navigateTo({
+      name: 'loading',
+    })
+
+    // If you use "await" here, the loading will not be shown
+    authCheck()
+      .then(() => {
+        navigateTo(initialTargetRoute)
+      })
+  })
 })

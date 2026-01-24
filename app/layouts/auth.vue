@@ -1,33 +1,31 @@
 <template>
-  <layouts-loading-container>
-    <v-app>
-      <v-main>
-        <div class="d-flex loginPageContainer">
+  <v-app>
+    <v-main>
+      <div class="d-flex loginPageContainer">
+        <div
+          class="d-md-block d-none w-md-50 h-100"
+        >
           <div
-            class="d-md-block d-none w-md-50 h-100"
-          >
-            <div
-              class="w-100 h-100 ultraRounded overflow-hidden"
-              :style="{
-                backgroundImage: `url(${chartsAndCalcsImagePath})`,
-                backgroundPosition: 'center center',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-              }"
-            />
-          </div>
+            class="w-100 h-100 ultraRounded overflow-hidden"
+            :style="{
+              backgroundImage: `url(${chartsAndCalcsImagePath})`,
+              backgroundPosition: 'center center',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+            }"
+          />
+        </div>
 
-          <div
-            class="w-md-50 w-100 h-100 loginPageContentContainer"
-          >
-            <div class="h-100 mx-auto loginPageContentContainer">
-              <slot />
-            </div>
+        <div
+          class="w-md-50 w-100 h-100 loginPageContentContainer"
+        >
+          <div class="h-100 mx-auto loginPageContentContainer">
+            <slot />
           </div>
         </div>
-      </v-main>
-    </v-app>
-  </layouts-loading-container>
+      </div>
+    </v-main>
+  </v-app>
 </template>
 
 <script setup lang="ts">

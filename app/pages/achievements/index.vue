@@ -91,16 +91,16 @@
           </header>
 
           <v-card
-            v-for="(themeData, themeIndex) in themesDataArr"
+            v-for="(themeData, themeIndex) in themesStore.themesData"
             :key="`themeIndex${themeIndex}`"
             :class="{
               'text-center ultraRounded py-5 themeCard': true,
-              'isActive': localStorageHandler.selectedThemeId.value === themeData.id,
+              'isActive': themesStore.currentTheme === themeData.id,
             }"
             color="card"
             :disabled="!themeData.allowed"
             flat
-            @click="localStorageHandler.setThemeId(themeData.id)"
+            @click="themesStore.setTheme(themeData.id)"
           >
             <div class="pa-5">
               <icons-dynamic-theme-icon
@@ -132,7 +132,8 @@ definePageMeta({
 const achievementsStore = useAchievementsStore()
 
 const vuetifyTheme = useTheme()
-const localStorageHandler = useLocalStorage()
+
+const themesStore = useThemesStore()
 
 const route = useRoute()
 const router = useRouter()
@@ -146,8 +147,6 @@ const selectedTab = computed({
     router.push({ query: { tab: newValue } })
   },
 })
-
-const themesDataArr = getThemesDataArr()
 
 function getAchievementProgress(achievementData: AchivementData) {
   return achievementData.currentStep / achievementData.totalSteps * 100
